@@ -1,9 +1,8 @@
 package ru.skillbranch.devintensive.extensions
 
+import ru.skillbranch.devintensive.extensions.TimeUnits.*
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.TimeUnit
-import java.util.concurrent.TimeUnit.*
 
 fun Date.format(pattern: String = "HH:mm:ss dd.MM.yy"): String {
     val dateFormat = SimpleDateFormat(pattern, Locale("ru"))
@@ -14,13 +13,12 @@ private const val MINUTE_SECONDS = 60L
 private const val HOUR_SECONDS = 3600L
 private const val DAY_SECONDS = 24 * 60 * 60L
 
-fun Date.add(value: Int, unit: TimeUnit): Date {
+fun Date.add(value: Int, unit: TimeUnits): Date {
     time += when (unit) {
-        SECONDS -> value * 1000L
-        MINUTES -> (value * MINUTE_SECONDS) * 1000L
-        HOURS -> (value * HOUR_SECONDS) * 1000L
-        DAYS -> (value * DAY_SECONDS) * 1000L
-        else -> throw IllegalArgumentException("Wrong time unit")
+        SECOND -> value * 1000L
+        MINUTE -> (value * MINUTE_SECONDS) * 1000L
+        HOUR -> (value * HOUR_SECONDS) * 1000L
+        DAY -> (value * DAY_SECONDS) * 1000L
     }
     return this
 }
@@ -55,4 +53,11 @@ fun Date.humanizeDiff(): String {
         }
     }
     return timeLines.joinToString(separator = " ") + " назад"
+}
+
+enum class TimeUnits {
+    SECOND,
+    MINUTE,
+    HOUR,
+    DAY
 }

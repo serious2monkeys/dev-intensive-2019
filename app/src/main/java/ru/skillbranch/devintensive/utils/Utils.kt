@@ -57,18 +57,20 @@ object Utils {
         else last
     }
 
+    /**
+     * Транслитерация
+     *
+     * @param payload String - полезная нагрузка
+     * @param divider String - символ-разделитель
+     */
     fun transliteration(payload: String, divider: String = " "): String {
         val buffer = StringBuffer()
         payload.asSequence().map { char ->
             val upper = char.isUpperCase()
             val sign = CHAR_MAPPING[char.toLowerCase()] ?: char.toString()
-            val first = if (upper) {
-                sign[0].toUpperCase()
-            } else sign[0]
-            if (sign.length == 1)
-                first
-            else
-                first.toString() + sign[1]
+            if (upper) {
+                sign.capitalize()
+            } else sign
         }.forEach { buffer.append(it) }
         return buffer.toString().replace(Regex("\\s"), divider)
     }
