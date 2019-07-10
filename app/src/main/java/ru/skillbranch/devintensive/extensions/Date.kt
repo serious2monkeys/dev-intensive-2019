@@ -13,7 +13,7 @@ private const val MINUTE_SECONDS = 60L
 private const val HOUR_SECONDS = 3600L
 private const val DAY_SECONDS = 24 * 60 * 60L
 
-fun Date.add(value: Int, unit: TimeUnits): Date {
+fun Date.add(value: Int, unit: TimeUnits = SECOND): Date {
     time += when (unit) {
         SECOND -> value * 1000L
         MINUTE -> (value * MINUTE_SECONDS) * 1000L

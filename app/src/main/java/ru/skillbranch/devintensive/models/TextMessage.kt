@@ -1,6 +1,6 @@
 package ru.skillbranch.devintensive.models
 
-import ru.skillbranch.devintensive.extensions.format
+import ru.skillbranch.devintensive.extensions.humanizeDiff
 import java.util.*
 
 /**
@@ -18,6 +18,6 @@ class TextMessage(
     /**
      * {@inheritDoc}
      */
-    override fun formatMessage(): String = "Текстовое сообщение \"(${text
-        ?: "Пусто"})\" отправлено пользователем ${from?.firstName} ${from?.lastName} в беседу ${chat.id} ${date.format()}"
+    override fun formatMessage(): String =
+        "Id: $id ${from?.firstName} ${if (isIncoming) "получил" else "отправил"} сообщение \"$text\" ${date.humanizeDiff()}"
 }

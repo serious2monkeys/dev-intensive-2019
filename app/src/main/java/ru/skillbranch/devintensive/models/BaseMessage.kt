@@ -18,7 +18,7 @@ abstract class BaseMessage(
      */
     abstract fun formatMessage(): String
 
-    companion object MessageFactory {
+    companion object AbstractFactory {
         private var lastId = 0
         fun makeMessage(
             from: User?,
